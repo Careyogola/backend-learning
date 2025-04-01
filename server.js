@@ -1,4 +1,7 @@
+require('dotenv').config();
 const express = require('express');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const db = require("better-sqlite3")("ourApp.db");
 db.pragma("journal_mode = WAL");
 // DB SETUP
@@ -7,7 +10,7 @@ const createTables = db.transaction(()=>{
     db.prepare(`
         CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name STRING NOT NULL UNIQUE,
+        username STRING NOT NULL UNIQUE,
         email STRING NOT NULL,
         password STRING NOT NULL
         )
@@ -22,6 +25,13 @@ const app = express(); //INITIALISATION
 
 app.use(function (req, res, next){
     res.locals.errors = [];
+
+    // try to decode incoming cookie
+    try{
+
+    } catch(error){
+
+    }
     next();
 })
 
@@ -61,14 +71,23 @@ app.post("/register", (req, res)=>{
         
     } 
     // save new user to db
-    const ourStatement = db.prepare("INSERT INTO users (name, email, password) VALUES(?, ?, ?)");
-    ourStatement.run(req.body.name, req.body.email, req.body.password);
 
-    res.send("Thank You!")
+    const salt = bcrypt.genSaltSync(10);
+    req.body.password = bcrypt.hashSync(req.body.password, salt);
+    const ourStatement = db.prepare("INSERT INTO users (username, email, password) VALUES(?, ?, ?)");
+    ourStatement.run(req.body.name, req.body.email, req.body.password);
 
 
 
     //login user by giving them cookies
+    const ourTokenValue = jwt.sign({skyColor: "blue", userid: 3}, process.env.JWTSECRET)
+    res.cookie("oursimpleapp", "supertopsecretvalue", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "strict",
+        maxAge: 1000 * 60 *60 *24
+    })
     
+    res.send("Thank You!")
 })
 app.listen(3002);

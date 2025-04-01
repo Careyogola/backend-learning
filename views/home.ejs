@@ -12,13 +12,34 @@
     <header>
         <h2><a href="/">Our wonderful App</a></h2>
         <nav>
-            <a href="#">Login</a>
+            <a href="/login">Login</a>
         </nav>
     </header>
 
     <main>
-        <h3>Hello This is Homepage</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis dolores autem voluptate dignissimos nemo voluptatibus aspernatur sapiente qui saepe nihil voluptatem, nesciunt odit, natus, sed consequuntur recusandae omnis doloremque suscipit!</p>
+        <form action="/register" method="POST">
+            <% if (errors && errors.length > 0) { %>
+                <ul style="color: red; list-style: none; padding: 0;">
+                    <% errors.forEach(error => { %>
+                        <li><%= error %></li>
+                    <% }) %>
+                </ul>
+            <% } %>
+       <fieldset>
+        <legend>
+            Create an account
+        </legend>
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password">
+        <label for="password_confirmation">Confirm Password</label>
+        <input type="password" name="password_confirmation" id="password_confirmation">
+        <input type="submit" value="Signup">
+       </fieldset>
+    </form>
     </main>
 
     <footer>

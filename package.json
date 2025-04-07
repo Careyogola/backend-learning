@@ -1,27 +1,28 @@
 {
-  "name": "gear-backend",
+  "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "dev": "nodemon server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Careyogola/backend-learning.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Careyogola/backend-learning/issues"
+  },
+  "homepage": "https://github.com/Careyogola/backend-learning#readme",
   "description": "",
   "dependencies": {
-    "bcrypt": "^5.1.1",
-    "better-sqlite3": "^11.9.1",
-    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "ejs": "^3.1.10",
     "express": "^5.1.0",
-    "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.13.1",
     "nodemon": "^3.1.9"
   }
 }

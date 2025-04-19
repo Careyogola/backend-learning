@@ -1,3 +1,4 @@
-export default signin(){
+
+export const signup = async (req, res) => {
     
 }

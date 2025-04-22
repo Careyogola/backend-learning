@@ -1,6 +1,5 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import mysql from 'mysql2';
 dotenv.config();
 
 import authRoutes from './routes/AuthRoutes.js';
@@ -22,5 +21,5 @@ app.get('/users', (req, res) => {
   });
 const port = process.env.PORT || 4000
 app.listen(port, ()=>{
-    console.log(`Server is live on http://localhost:${port}`)
+    console.log(`Server is live on http://localhost:${port}`);
 });

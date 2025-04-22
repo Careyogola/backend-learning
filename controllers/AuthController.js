@@ -26,7 +26,7 @@ export const signup = async (req, res) => {
         User.create({ name, email, password: hashPassword }, (err, result) => {
           if (err) return res.status(500).json({ error: 'Failed to create user.' });
   
-          res.status(201).json({ User,message: 'User created successfully!' });
+          res.status(201).json({ message: 'User created successfully!' });
         });
       });
   

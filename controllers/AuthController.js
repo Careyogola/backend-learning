@@ -1,9 +1,12 @@
 
 export const signup = async (req, res) => {
-    res.json({
-        app: "app",
-        message: "Data"
-    });
+    try {
+        const { name, email, password } = req.body;
+        
+    } catch (error) {
+        console.error(error);
+        
+    }
 }
 
 export const signin = async (req, res) => {

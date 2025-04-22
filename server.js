@@ -1,14 +1,25 @@
 import express from 'express';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
+import mysql from 'mysql2';
 dotenv.config();
 
 import authRoutes from './routes/AuthRoutes.js';
+import connection from './config/database.js';
 
 const app = express();
 
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
+
+app.get('/users', (req, res) => {
+    connection.query('SELECT * FROM users', (err, results) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+      res.json(results);
+    });
+  });
 const port = process.env.PORT || 4000
 app.listen(port, ()=>{
     console.log(`Server is live on http://localhost:${port}`)

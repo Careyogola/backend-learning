@@ -1,4 +1,4 @@
-import connection from '../config/database.js';
+import db from '../config/database.js';
 
 const ticket = {
 

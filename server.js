@@ -4,6 +4,7 @@ import cors from 'cors';
 dotenv.config();
 
 import authRoutes from './routes/AuthRoutes.js';
+import ticketRoutes from './routes/TicketsRoutes.js'
 import connection from './config/database.js';
 
 const app = express();
@@ -14,7 +15,7 @@ app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 
 
 app.use('/api/auth', authRoutes);
-
+app.use('/api/tickets', ticketRoutes);
 app.get('/users', (req, res) => {
     connection.query('SELECT * FROM users', (err, results) => {
       if (err) {

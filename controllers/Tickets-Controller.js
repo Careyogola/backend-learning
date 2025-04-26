@@ -20,9 +20,31 @@ export const createTickets = async (req, res) => {
 
 export const updateTickets = async (req, res) => {
     try {
-        const tickets = await ticket.update();
+        const { id } = req.params;           
+        const ticketData = req.body;          
+
+        const result = await ticket.update(id, ticketData);   
+        res.status(200).json(result);
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ error : error.message})
     }
 }
+
+export const getTicketsById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const result = await ticket.getById(id);
+
+        if (!result) {
+            return res.status(404).json({ error: "Ticket not found." });
+        }
+
+        res.status(200).json(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: error.message });
+    }
+};

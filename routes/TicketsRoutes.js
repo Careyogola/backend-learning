@@ -5,9 +5,6 @@ const router = express.Router();
 
 router.get('/', getTickets);
 router.get('/:id', getTicketsById);
-router.post('/:id', async (req, res)=> {
-
-});
 router.put('/:id', updateTickets);
 router.post('/', createTickets);
 router.delete('/:id', deleteTickets);

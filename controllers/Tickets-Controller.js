@@ -17,3 +17,12 @@ export const createTickets = async (req, res) => {
         res.status(500).json({ error : error.message})
     }
 }
+
+export const updateTickets = async (req, res) => {
+    try {
+        const tickets = await ticket.update();
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error : error.message})
+    }
+}

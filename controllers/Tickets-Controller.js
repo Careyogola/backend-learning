@@ -65,3 +65,23 @@ export const deleteTickets = async (req, res) => {
     }
 };
 
+export const postTicketById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const ticketData = req.body;
+
+        console.log('Received ticket data:', ticketData); 
+        if (!ticketData.title || !ticketData.event_date || !ticketData.price) {
+            return res.status(400).json({ error: 'Missing required fields' });
+        }
+
+        const result = await ticket.create(id, ticketData);
+        res.status(200).json(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            error: "Internal server error."
+        });
+    }
+};
+
